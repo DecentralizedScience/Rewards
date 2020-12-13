@@ -4036,9 +4036,92 @@
     "name": "solc",
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
-  "networks": {},
+  "networks": {
+    "5777": {
+      "events": {
+        "0xd9d0d001c6807db086c0bd0e5cbcd0a0caccdc7dea633917d21d634c8b19963c": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "title",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "tipAmount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "author",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address payable",
+              "name": "reviewer",
+              "type": "address"
+            }
+          ],
+          "name": "PaperCreated",
+          "type": "event"
+        },
+        "0xdb8dd63a5a238451c4470286cc17701aecec5a43e2a186a28fea53ae8bb380f2": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "string",
+              "name": "title",
+              "type": "string"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint256",
+              "name": "tipAmount",
+              "type": "uint256"
+            },
+            {
+              "indexed": false,
+              "internalType": "address",
+              "name": "author",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "address payable",
+              "name": "reviewer",
+              "type": "address"
+            }
+          ],
+          "name": "PaperTipped",
+          "type": "event"
+        }
+      },
+      "links": {},
+      "address": "0xb8df58A4881122F7d6D1Cd77E45120b12753E43B",
+      "transactionHash": "0x9138d1ac7082bbb48c0ca30e4223d6fe0f3cbd96daf32c54855993cef7745d06"
+    }
+  },
   "schemaVersion": "3.3.1",
-  "updatedAt": "2020-12-13T16:39:36.090Z",
+  "updatedAt": "2020-12-13T17:42:13.619Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },
