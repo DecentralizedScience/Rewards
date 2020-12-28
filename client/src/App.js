@@ -16,18 +16,18 @@ class App extends Component {
 
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
-
+      this.setState({ account: accounts[0] })
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
       const deployedNetwork = RewardsContract.networks[networkId];
-      const instance = new web3.eth.Contract(
-        RewardsContract.abi,
-        deployedNetwork && deployedNetwork.address,
-      );
-
+      const instance = new web3.eth.Contract(RewardsContract.abi, deployedNetwork.address);
+      // Get the first paper
+      const paper = await instance.methods.papers(0).call()
+      this.setState({paper: paper})
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance });
+      this.setState({ web3, contract: instance });
+
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -37,18 +37,21 @@ class App extends Component {
     }
   };
 
-  runExample = async () => {
-    const { accounts, contract } = this.state;
+  constructor(props){
+    super(props)
+    this.state = {
+      account: '',
+      paperCount: 0,
+      paper: '',
+      contract: null
+    }
 
-    // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
+    this.tipPaper = this.tipPaper.bind(this);
+  }
 
-    // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
-
-    // Update state with the result.
-    this.setState({ storageValue: response });
-  };
+  tipPaper(id, amount){
+    this.state.contract.methods.tipPaper(id).send({ from: this.state.account, value: amount})
+  }
 
   render() {
     if (!this.state.web3) {
@@ -56,10 +59,13 @@ class App extends Component {
     }
     return (
       <div>
-        <NavBar></NavBar>
+        <NavBar account={this.state.account}></NavBar>
 
         <div className="cards">
-          <Card></Card>
+          <Card 
+            tipPaper={this.tipPaper}
+            paper={this.state.paper}
+          ></Card>
         </div>
       </div>
     );

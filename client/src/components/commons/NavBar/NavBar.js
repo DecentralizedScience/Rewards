@@ -23,7 +23,15 @@ export default class NavBar extends Component {
             active={activeItem === 'papers'}
             onClick={this.handleItemClick}
           />
+          <Menu.Menu position='right'>
+            <Menu.Item
+              name={this.props.account}
+              active={activeItem === 'account'}
+              onClick={this.handleItemClick}
+            />
+          </Menu.Menu>
         </Menu>
+        
       </Segment>
     )
   }
