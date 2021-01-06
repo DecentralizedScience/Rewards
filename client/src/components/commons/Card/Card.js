@@ -1,19 +1,19 @@
 import React from 'react'
 import { Button, Card, Image } from 'semantic-ui-react'
 
-const CardExampleGroups = ({tipPaper, paper}) => (
+const CardExampleGroups = ({tipPaper, papers}) => (
   <Card.Group>
-    <Card>
+      {papers.map((paper, key) => {
+                return(
+      <Card key={key}>
       <Card.Content>
         <Image
           floated='right'
           size='mini'
           src='/steve.jpg'
         />
-        <Card.Header>Steve Sanders</Card.Header>
-        <Card.Description>
-          Steve's paper: {paper.title}
-            </Card.Description>
+        <Card.Header>{paper.title}</Card.Header>
+        <Card.Meta>A paper</Card.Meta>
       </Card.Content>
       <Card.Content extra>
         <div className='ui two buttons'>
@@ -30,6 +30,7 @@ const CardExampleGroups = ({tipPaper, paper}) => (
         </div>
       </Card.Content>
     </Card>
+                )})}
   </Card.Group>
 );
 

@@ -18,11 +18,6 @@ export default class NavBar extends Component {
             active={activeItem === 'home'}
             onClick={this.handleItemClick}
           />
-          <Menu.Item
-            name='papers'
-            active={activeItem === 'papers'}
-            onClick={this.handleItemClick}
-          />
           <Menu.Menu position='right'>
             <Menu.Item
               name={this.props.account}
