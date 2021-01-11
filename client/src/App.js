@@ -4,6 +4,7 @@ import getWeb3 from "./getWeb3";
 import NavBar from './components/commons/NavBar/NavBar'
 import Card from './components/commons/Card/Card'
 import Form from './components/commons/Form/Form'
+import { Grid, Loader } from 'semantic-ui-react'
 
 
 import "./App.css";
@@ -31,7 +32,7 @@ class App extends Component {
         const paper = await instance.methods.papers(i).call()
         this.setState({papers: [...this.state.papers, paper]})
       }
-
+      this.setState({ ready: false })
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, contract: instance });
@@ -46,13 +47,16 @@ class App extends Component {
     }
   };
 
+ 
+
   constructor(props){
     super(props)
     this.state = {
       account: '',
       paperCount: 0,
       papers: [],
-      contract: null
+      contract: null,
+      ready: true
     }
 
     this.tipPaper = this.tipPaper.bind(this);
@@ -64,7 +68,12 @@ class App extends Component {
   }
 
   createPaper(title){
-    this.state.contract.methods.createPaper(title, this.state.account).send({from: this.state.account})
+    this.setState({ ready: true})
+    this.state.contract.methods.createPaper(title, this.state.account).send({from: this.state.account}).once('receipt', (receipt) => {
+     this.setState({ ready: false })
+    })
+    
+      
   }
 
   render() {
@@ -74,19 +83,34 @@ class App extends Component {
     return (
       <div>
         <NavBar account={this.state.account}></NavBar>
-        <div className="cards">
-        <Form createPaper={this.createPaper}></Form>
-        </div>
-        <p></p>
-        <div className="cards">
+        {this.state.ready 
+        ?
+          <div> 
+            <Loader active inline='centered' />
+          </div> 
+        
+        :
+
+          <div> 
+          <div className="cards">
+            <Form createPaper={this.createPaper}></Form>
+            <p></p>
+          </div>
+
+          <div className="cards">
           <Card
             tipPaper={this.tipPaper}
             papers={this.state.papers}
           ></Card>
-        </div>
+          </div>
+          </div>
+        }
       </div>
     );
   }
+
+ 
+
 }
 
 export default App;
