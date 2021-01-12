@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { Menu, Segment } from 'semantic-ui-react'
 import './NavBar.css'
+import Identicon from 'identicon.js';
+
+
+
 
 export default class NavBar extends Component {
   state = { activeItem: 'home' }
@@ -19,6 +23,14 @@ export default class NavBar extends Component {
             onClick={this.handleItemClick}
           />
           <Menu.Menu position='right'>
+         
+          <img
+                className='ml-2'
+                width='30'
+                height='30'
+                src={`data:image/png;base64,${new Identicon(this.props.account, 30).toString()}`}
+              />
+
             <Menu.Item
               name={this.props.account}
               active={activeItem === 'account'}
