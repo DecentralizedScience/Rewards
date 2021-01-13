@@ -2,26 +2,26 @@ import React, { Component } from 'react'
 import { Form } from 'semantic-ui-react'
 
 class FormCreate extends Component {
-  state = {}
-
-  handleChange = (e, { name, value }) => this.setState({ [name]: value })
-
-  handleSubmit = () => {
-    this.props.createPaper(this.state.name)
-    this.setState({ name: '' })
+  constructor(props) {
+    super(props)
+    this.textInput = React.createRef();
   }
 
-  render() {
-    const { name } = this.state
+  handleSubmit = e => {
+    e.preventDefault();
+    const title = this.textInput.current.value;
+    this.props.createPaper(title);
+  };
 
+  render() {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Group>
-          <Form.Input
+          <input
+            type="text"
             placeholder='Title of the new paper'
-            name='name'
-            value={name}
-            onChange={this.handleChange}
+            ref={this.textInput}
+            required
           />
           <Form.Button content='Create' />
         </Form.Group>

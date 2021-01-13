@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Segment } from 'semantic-ui-react'
+import { Menu, Segment, Image } from 'semantic-ui-react'
 import './NavBar.css'
 import Identicon from 'identicon.js';
 
@@ -15,7 +15,7 @@ export default class NavBar extends Component {
     const { activeItem } = this.state
 
     return (
-      <Segment inverted class="segment-overwrite">
+      <Segment inverted className="segment-overwrite">
         <Menu inverted secondary>
           <Menu.Item
             name='home'
@@ -23,14 +23,12 @@ export default class NavBar extends Component {
             onClick={this.handleItemClick}
           />
           <Menu.Menu position='right'>
-         
-          <img
-                className='ml-2'
-                width='30'
-                height='30'
+          <Menu.Item>
+              <Image 
                 src={`data:image/png;base64,${new Identicon(this.props.account, 30).toString()}`}
+                avatar
               />
-
+          </Menu.Item>
             <Menu.Item
               name={this.props.account}
               active={activeItem === 'account'}

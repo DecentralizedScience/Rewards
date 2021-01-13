@@ -4,7 +4,7 @@ import getWeb3 from "./getWeb3";
 import NavBar from './components/commons/NavBar/NavBar'
 import Card from './components/commons/Card/Card'
 import Form from './components/commons/Form/Form'
-import { Grid, Loader } from 'semantic-ui-react'
+import { Loader } from 'semantic-ui-react'
 
 
 import "./App.css";
@@ -26,7 +26,6 @@ class App extends Component {
       const instance = new web3.eth.Contract(RewardsContract.abi, deployedNetwork.address);
       // Get the papers
       const paperCount = await instance.methods.paperCount().call();
-      console.log(paperCount);
       this.setState({paperCount})
       for(var i = 0; i < paperCount; i++){
         const paper = await instance.methods.papers(i).call()
@@ -36,7 +35,6 @@ class App extends Component {
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
       this.setState({ web3, contract: instance });
-      console.log({papers: this.state.papers})
 
     } catch (error) {
       // Catch any errors for any of the above operations.
@@ -47,6 +45,12 @@ class App extends Component {
     }
   };
 
+  updatePapers = async () =>{
+      const paperCount = await this.state.contract.methods.paperCount().call();
+      this.setState({paperCount})
+      const paper = await this.state.contract.methods.papers(paperCount - 1).call()
+      this.setState({papers: [...this.state.papers, paper]})
+  }
  
 
   constructor(props){
@@ -64,16 +68,26 @@ class App extends Component {
   }
 
   tipPaper(id, amount){
-    this.state.contract.methods.tipPaper(id).send({ from: this.state.account, value: amount})
+    this.setState({ ready: true})
+    this.state.contract.methods.tipPaper(id).send({ from: this.state.account, value: amount}).once('receipt', (receipt) => {
+      this.setState({ ready: false })
+     })
+   
   }
 
   createPaper(title){
     this.setState({ ready: true})
-    this.state.contract.methods.createPaper(title, this.state.account).send({from: this.state.account}).once('receipt', (receipt) => {
+    this.state.contract.methods.createPaper(title, this.state.account).send({from: this.state.account})
+    /*.on('error', function(error, receipt) {
+      alert(
+        `Operation cancelled.`,
+      );
+      this.setState({ ready: false })
+    })*/
+    .once('receipt', (receipt) => {
+     this.updatePapers()
      this.setState({ ready: false })
-    })
-    
-      
+    })   
   }
 
   render() {

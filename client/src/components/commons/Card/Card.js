@@ -1,5 +1,7 @@
 import React from 'react'
 import { Button, Card, Image } from 'semantic-ui-react'
+import Identicon from 'identicon.js';
+
 
 const CardExampleGroups = ({tipPaper, papers}) => (
   <Card.Group>
@@ -10,7 +12,7 @@ const CardExampleGroups = ({tipPaper, papers}) => (
         <Image
           floated='right'
           size='mini'
-          src='/steve.jpg'
+          src={`data:image/png;base64,${new Identicon(paper.author, 30).toString()}`}
         />
         <Card.Header>{paper.title}</Card.Header>
         <Card.Meta>A paper</Card.Meta>
