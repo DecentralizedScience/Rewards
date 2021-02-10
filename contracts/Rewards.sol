@@ -1,4 +1,4 @@
-pragma solidity >=0.4.21 <0.7.0;
+pragma solidity ^0.8.0;
 
 contract Rewards {
     uint public paperCount = 0;
@@ -43,7 +43,7 @@ contract Rewards {
         address payable _reviewer = _paper.reviewer;
         _paper.tipAmount += msg.value;
 
-        address(_reviewer).transfer(msg.value);
+        _reviewer.transfer(msg.value);
 
         papers[_id] = _paper;
         emit PaperTipped(paperCount, _paper.title, _paper.tipAmount, _paper.author, _reviewer);

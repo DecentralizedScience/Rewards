@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Card, Image } from "semantic-ui-react";
 import Identicon from "identicon.js";
 
-const CardExampleGroups = ({ tipPaper, papers }) => (
+const CardExampleGroups = ({ tipPaper, papers, web3 }) => (
   <Card.Group>
     {papers.map((paper, key) => {
       return (
@@ -26,7 +26,7 @@ const CardExampleGroups = ({ tipPaper, papers }) => (
                 color="green"
                 name={paper.id}
                 onClick={(event) => {
-                  let tipAmount = window.web3.toWei(0.1, "ether");
+                  let tipAmount = web3.utils.toWei("0.1", "ether");
                   console.log(event.target.name, tipAmount);
                   tipPaper(event.target.name, tipAmount);
                 }}

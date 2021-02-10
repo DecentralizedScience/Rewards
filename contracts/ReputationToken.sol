@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.0;
 
-import "../../utils/Context.sol";
+import "../utils/Context.sol";
 import "./IERC20.sol";
 
 /**
@@ -29,31 +29,16 @@ import "./IERC20.sol";
  * functions have been added to mitigate the well-known issues around setting
  * allowances. See {IERC20-approve}.
  */
-contract ERC20 is Context, IERC20 {
+contract ReputationToken is Context, IERC20 {
     mapping (address => uint256) private _balances;
 
     mapping (address => mapping (address => uint256)) private _allowances;
 
     uint256 private _totalSupply;
 
-    string private _name;
-    string private _symbol;
-    uint8 private _decimals;
-
-    /**
-     * @dev Sets the values for {name} and {symbol}, initializes {decimals} with
-     * a default value of 18.
-     *
-     * To select a different value for {decimals}, use {_setupDecimals}.
-     *
-     * All three of these values are immutable: they can only be set once during
-     * construction.
-     */
-    constructor (string memory name_, string memory symbol_) {
-        _name = name_;
-        _symbol = symbol_;
-        _decimals = 0;
-    }
+    string private _name = "Reputation";
+    string private _symbol = "RPT";
+    uint8 private _decimals = 0;
 
     /**
      * @dev Returns the name of the token.

@@ -115,7 +115,7 @@ class App extends Component {
             </div>
 
             <div className="cards">
-              <Card tipPaper={this.tipPaper} papers={this.state.papers}></Card>
+              <Card tipPaper={this.tipPaper} papers={this.state.papers} web3={this.state.web3}></Card>
             </div>
           </div>
         )}
