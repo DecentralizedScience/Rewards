@@ -24,30 +24,37 @@ contract('Rewards', ([deployer, author, reviewer, tipper]) => {
     let result, paperCount
 
     before(async () => {
-      result = await rewards.createPaper('This is my first paper', reviewer, { from: author })
+      result = await rewards.createPaper('This is my first paper', { from: author })
       paperCount = await rewards.paperCount()
+      paperCount = paperCount.toNumber()
     })
 
     it('creates papers', async () => {
       // SUCESS
       const event = result.logs[0].args
-      assert.equal(event.id.toNumber() + 1, paperCount.toNumber(), 'id is correct')
+      assert.equal(event.id.toNumber(), paperCount , 'id is correct')
       assert.equal(event.title, 'This is my first paper', 'title is correct')
       assert.equal(event.tipAmount, '0', 'tip amount is correct')
       assert.equal(event.author, author, 'author is correct')
-      assert.equal(event.reviewer, reviewer, 'reviewer is correct')
 
       // FAILURE: Paper must have title
       await rewards.createPaper('', { from: author }).should.be.rejected;
     })
 
-    it('lists papers', async () => {
+    it('read first paper', async () => {
       const paper = await rewards.papers(paperCount - 1)
-      assert.equal(paper.id.toNumber() + 1, paperCount.toNumber(), 'id is correct')
+      const reviewerCount = await rewards.reviewerCount(paperCount - 1)
+      assert.equal(paper.id.toNumber(), paperCount, 'id is correct')
       assert.equal(paper.title, 'This is my first paper', 'title is correct')
       assert.equal(paper.tipAmount, '0', 'tip amount is correct')
       assert.equal(paper.author, author, 'author is correct')
-      assert.equal(paper.reviewer, reviewer, 'reviewer is correct')
+      assert.equal(reviewerCount.toNumber(), '0', 'reviewer list is empty')
+    })
+
+    it('add reviewer', async () => {
+      paper = await rewards.addReviewer(paperCount - 1, reviewer, 'LGTM')
+      const reviewerCount = await rewards.reviewerCount(paperCount - 1)
+      assert.equal(reviewerCount.toNumber(), '1', 'have 1 reviewer')
     })
 
     it('allows users to tip reviewers', async () => {

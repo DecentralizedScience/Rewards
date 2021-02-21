@@ -228,6 +228,15 @@ contract ReputationToken is Context, IERC20 {
     }
 
     /**
+     * @dev Creates `amount` new tokens for `to`.
+     *
+     * See {ERC20-_mint}.
+     */
+    function mint(address to, uint256 amount) public virtual {
+        _mint(to, amount);
+    }
+
+    /**
      * @dev Destroys `amount` tokens from `account`, reducing the
      * total supply.
      *
@@ -248,6 +257,15 @@ contract ReputationToken is Context, IERC20 {
         _totalSupply -= amount;
 
         emit Transfer(account, address(0), amount);
+    }
+
+    /**
+     * @dev Destroys `amount` tokens from `to`.
+     *
+     * See {ERC20-_burn}.
+     */
+    function burn(address to, uint256 amount) public virtual {
+        _burn(to, amount);
     }
 
     /**
