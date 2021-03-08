@@ -3,7 +3,7 @@
 pragma solidity ^0.8.0;
 
 import "../utils/Context.sol";
-import "./IERC20.sol";
+import "./IReputationToken.sol";
 
 /**
  * @dev Implementation of the {IERC20} interface.
@@ -29,7 +29,7 @@ import "./IERC20.sol";
  * functions have been added to mitigate the well-known issues around setting
  * allowances. See {IERC20-approve}.
  */
-contract ReputationToken is Context, IERC20 {
+contract ReputationToken is Context, IReputationToken {
     mapping (address => uint256) private _balances;
 
     mapping (address => mapping (address => uint256)) private _allowances;

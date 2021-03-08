@@ -63,11 +63,11 @@ contract('Rewards', ([deployer, author, reviewer, tipper]) => {
       oldReviewerBalance = await web3.eth.getBalance(reviewer)
       oldReviewerBalance = new web3.utils.BN(oldReviewerBalance)
 
-      result = await rewards.tipPaper(paperCount - 1, { from: tipper, value: web3.utils.toWei('1', 'Ether') })
+      result = await rewards.tipReviewer(paperCount - 1, reviewer, { from: tipper, value: web3.utils.toWei('1', 'Ether') })
 
       // SUCESS
       const event = result.logs[0].args
-      assert.equal(event.id.toNumber(), paperCount.toNumber(), 'id is correct')
+      assert.equal(event.id.toNumber(), '0', 'id is correct')
       assert.equal(event.title, 'This is my first paper', 'title is correct')
       assert.equal(event.tipAmount, '1000000000000000000', 'tip amount is correct')
       assert.equal(event.author, author, 'author is correct')
@@ -87,7 +87,7 @@ contract('Rewards', ([deployer, author, reviewer, tipper]) => {
       assert.equal(newReviewerBalance.toString(), exepectedBalance.toString())
 
       // FAILURE: Tries to tip a paper that does not exist
-      await rewards.tipPaper(99, { from: tipper, value: web3.utils.toWei('1', 'Ether') }).should.be.rejected;
+      await rewards.tipReviewer(99, { from: tipper, reviewer, value: web3.utils.toWei('1', 'Ether') }).should.be.rejected;
     })
 
   })
