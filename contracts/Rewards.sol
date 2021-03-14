@@ -1,12 +1,15 @@
 pragma solidity ^0.8.0;
 
 import "./ReputationToken.sol";
+import "./AwardsToken.sol";
 
 uint constant REPUTATION = 1;
 
 contract Rewards {
     mapping(string => bool) public hasGivenReputation;
+    mapping(string => bool) public hasGivenAward;
     ReputationToken public reputationtoken;
+    AwardsToken public awardsToken;
 
     struct Paper {
         uint id;
@@ -102,6 +105,19 @@ contract Rewards {
     function getReputation(address _reviewer) public view returns (uint256) {
         return reputationtoken.balanceOf(_reviewer);
     }
+
+    //TODO test and event
+    function giveAward(uint _id, address payable _reviewer, uint _awardId ) public payable{
+        require(_id < papers.length);
+        require(_awardId < 4);
+        require(bytes(papers[_id].reviews[_reviewer]).length != 0);
+        string memory _hash = string(abi.encode(_id, _reviewer, msg.sender, _awardId));
+        require(!hasGivenAward[_hash]);
+        awardsToken.mint(_reviewer, _hash);
+
+        //emit ReputationGiven(_id,  _reviewer, msg.sender);
+    }
+
 
     function paperCount() public view returns (uint256) {
         return papers.length;
