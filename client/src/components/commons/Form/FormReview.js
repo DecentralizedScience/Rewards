@@ -10,7 +10,7 @@ class FormCreate extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const title = this.textInput.current.value;
-    this.props.createPaper(title);
+    this.props.createReview(this.props.match.params.id, title);
   };
 
   render() {

@@ -35,6 +35,13 @@ class App extends Component {
       this.setState({ paperCount });
       for (var i = 0; i < paperCount; i++) {
         const paper = await instance.methods.papers(i).call();
+        //Get the reviews of the paper
+        const reviewerCount = await instance.methods.reviewerCount(i).call();
+        if(reviewerCount > 0){
+          const reviewers = await instance.methods.getReviewers(i).call();
+          //const reviews = await instance.methods.getReviews(i, reviewers[0]).call();
+          this.setState({ reviews: [...this.state.reviews, reviewers] });
+        }
         this.setState({ papers: [...this.state.papers, paper] });
       }
       this.setState({ ready: false });
@@ -59,6 +66,14 @@ class App extends Component {
     this.setState({ papers: [...this.state.papers, paper] });
   };
 
+  updateReviews = async (i) => {
+    const reviewerCount = await this.state.contract.methods.reviewerCount(i).call();
+    const reviewers = await this.state.contract.methods.getReviewers(i).call();
+    //const reviews = await this.state.contract.methods.getReviews(i, reviewers[0]).call();
+    this.setState({ reviews: [...this.state.reviews.slice(0,i), reviewers, ...this.state.reviews.slice(i+1, reviewerCount) ]});
+   
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -67,16 +82,18 @@ class App extends Component {
       papers: [],
       contract: null,
       ready: true,
+      reviews: [],
     };
 
     this.tipPaper = this.tipPaper.bind(this);
     this.createPaper = this.createPaper.bind(this);
+    this.createReview = this.createReview.bind(this);
   }
 
-  tipPaper(id, amount) {
+  tipPaper(id, amount, account) {
     this.setState({ ready: true });
     this.state.contract.methods
-      .tipPaper(id)
+      .tipReviewer(id, account)
       .send({ from: this.state.account, value: amount })
       .once("receipt", (receipt) => {
         this.setState({ ready: false });
@@ -96,6 +113,17 @@ class App extends Component {
     })*/
       .once("receipt", (receipt) => {
         this.updatePapers();
+        this.setState({ ready: false });
+      });
+  }
+
+  createReview(paper, author) {
+    this.setState({ ready: true });
+    this.state.contract.methods
+      .addReviewer(paper,this.state.account,author)
+      .send({ from: this.state.account })
+      .once("receipt", (receipt) => {
+        this.updateReviews(paper);
         this.setState({ ready: false });
       });
   }
@@ -134,11 +162,11 @@ class App extends Component {
               ) : (
                 <div>
                   <div className="cards">
-                    <FormReview createPaper={this.createPaper}></FormReview>
+                    <FormReview {...props} createReview={this.createReview}></FormReview>
                     <p></p>
                   </div>
                   <div className="cards">
-                    <Card {...props} tipPaper={this.tipPaper} papers={this.state.papers} web3={this.state.web3}></Card>
+                    <Card {...props} tipPaper={this.tipPaper} papers={this.state.papers} web3={this.state.web3} reviews={this.state.reviews} ></Card>
                   </div>
                 </div>
               )

@@ -118,6 +118,14 @@ contract Rewards {
         //emit ReputationGiven(_id,  _reviewer, msg.sender);
     }
 
+    function getReviewers(uint _id) public view returns (address [] memory){
+        return papers[_id].reviewers;
+    }
+
+    function getReviews(uint _id, address _reviewer) public view returns (string memory){
+        require(reviewerCount(_id) > 0);
+        return papers[_id].reviews[_reviewer];
+    }
 
     function paperCount() public view returns (uint256) {
         return papers.length;

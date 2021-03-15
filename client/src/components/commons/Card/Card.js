@@ -2,7 +2,8 @@ import React from "react";
 import { Label, Icon, Header, Container, Divider, Grid, Segment, Button, Card, Image } from "semantic-ui-react";
 import Identicon from "identicon.js";
 
-const CardExampleGroups = ({match, tipPaper, papers, web3 }) => (
+
+const CardExampleGroups = ({match, tipPaper, papers, web3, reviews, reviewCount}) => (
   <Segment>
     <Grid columns={2} relaxed='very'>
       <Grid.Column>
@@ -27,7 +28,6 @@ const CardExampleGroups = ({match, tipPaper, papers, web3 }) => (
         however, dogs are also a source of meat.
       </p>
     </Container>
-    <p>
     <p></p>
       <Label as='a'>
             <Image
@@ -41,49 +41,59 @@ const CardExampleGroups = ({match, tipPaper, papers, web3 }) => (
         
         {papers[match.params.id].author}
       </Label>
-    </p>
       </Grid.Column>
       <Grid.Column>
       <Card.Group>
-    {papers.map((paper, key) => {
+    {reviews[match.params.id] != null ?  (reviews[match.params.id].map((review, key) => {
       return (
-        <Card key={key}>
+        <Card fluid color="grey" key={key}>
           <Card.Content>
             <Image
               floated="right"
               size="mini"
               src={`data:image/png;base64,${new Identicon(
-                paper.author,
+                review,
                 30
               ).toString()}`}
             />
-            <Card.Header>{paper.title}</Card.Header>
+            <Card.Header>Review {key}</Card.Header>
+            <Card.Description>
+              by {review}
+            </Card.Description>
           </Card.Content>
           <Card.Content extra>
             <div className="ui three buttons">
               <Button
-                basic
-                color="purple"
-                name={paper.id}
-                onClick={(event) => {
+                animated='vertical'
+                basic color="black"
+                name={review}
+                onClick={() => {
                   let tipAmount = web3.utils.toWei("0.1", "ether");
-                  console.log(event.target.name, tipAmount);
-                  tipPaper(event.target.name, tipAmount);
+                  tipPaper(key, tipAmount, review);
                 }}
               >
-                Tip!
+                <Button.Content hidden>Tip!</Button.Content>
+                <Button.Content visible>
+                <Icon name='ethereum' />
+                </Button.Content>
               </Button>
-              <Button basic color="orange">
-                Thanks!
+              <Button animated='vertical' basic color="blue">
+                <Button.Content hidden>Say thanks!</Button.Content>
+                <Button.Content visible >
+                <Icon name='thumbs up' />
+                </Button.Content>
               </Button>
-              <Button basic color="green">
-                Reward
+              <Button animated='vertical' basic color="orange">
+                <Button.Content hidden>Reward</Button.Content>
+                <Button.Content visible>
+                <Icon name='trophy' />
+                </Button.Content>
               </Button>
             </div>
           </Card.Content>
         </Card>
       );
-    })}
+    })):(console.log("No hay revisiones"))}
   </Card.Group>
       </Grid.Column>
     </Grid>

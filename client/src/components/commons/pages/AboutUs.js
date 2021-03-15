@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import "./AboutUs.css"
 import { Header, Card, Icon, Image } from 'semantic-ui-react'
 
