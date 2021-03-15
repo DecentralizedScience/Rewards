@@ -1,9 +1,50 @@
 import React from "react";
-import { Button, Card, Image } from "semantic-ui-react";
+import { Label, Icon, Header, Container, Divider, Grid, Segment, Button, Card, Image } from "semantic-ui-react";
 import Identicon from "identicon.js";
 
-const CardExampleGroups = ({ tipPaper, papers, web3 }) => (
-  <Card.Group>
+const CardExampleGroups = ({match, tipPaper, papers, web3 }) => (
+  <Segment>
+    <Grid columns={2} relaxed='very'>
+      <Grid.Column>
+      <Container fluid>
+      <Header as='h2'>{papers[match.params.id].title}</Header>
+      <p>
+        Domestic dogs inherited complex behaviors, such as bite inhibition, from
+        their wolf ancestors, which would have been pack hunters with complex
+        body language. These sophisticated forms of social cognition and
+        communication may account for their trainability, playfulness, and
+        ability to fit into human households and social situations, and these
+        attributes have given dogs a relationship with humans that has enabled
+        them to become one of the most successful species on the planet today.
+      </p>
+      <p>
+        The dogs' value to early human hunter-gatherers led to them quickly
+        becoming ubiquitous across world cultures. Dogs perform many roles for
+        people, such as hunting, herding, pulling loads, protection, assisting
+        police and military, companionship, and, more recently, aiding
+        handicapped individuals. This impact on human society has given them the
+        nickname "man's best friend" in the Western world. In some cultures,
+        however, dogs are also a source of meat.
+      </p>
+    </Container>
+    <p>
+    <p></p>
+      <Label as='a'>
+            <Image
+              avatar
+              spaced='right'
+              src={`data:image/png;base64,${new Identicon(
+                papers[match.params.id].author,
+                30
+              ).toString()}`}
+            />
+        
+        {papers[match.params.id].author}
+      </Label>
+    </p>
+      </Grid.Column>
+      <Grid.Column>
+      <Card.Group>
     {papers.map((paper, key) => {
       return (
         <Card key={key}>
@@ -17,13 +58,12 @@ const CardExampleGroups = ({ tipPaper, papers, web3 }) => (
               ).toString()}`}
             />
             <Card.Header>{paper.title}</Card.Header>
-            <Card.Meta>A paper</Card.Meta>
           </Card.Content>
           <Card.Content extra>
-            <div className="ui two buttons">
+            <div className="ui three buttons">
               <Button
                 basic
-                color="green"
+                color="purple"
                 name={paper.id}
                 onClick={(event) => {
                   let tipAmount = web3.utils.toWei("0.1", "ether");
@@ -31,10 +71,13 @@ const CardExampleGroups = ({ tipPaper, papers, web3 }) => (
                   tipPaper(event.target.name, tipAmount);
                 }}
               >
-                Send Tip!
+                Tip!
               </Button>
-              <Button basic color="red">
-                Upvote
+              <Button basic color="orange">
+                Thanks!
+              </Button>
+              <Button basic color="green">
+                Reward
               </Button>
             </div>
           </Card.Content>
@@ -42,6 +85,11 @@ const CardExampleGroups = ({ tipPaper, papers, web3 }) => (
       );
     })}
   </Card.Group>
+      </Grid.Column>
+    </Grid>
+
+    <Divider vertical><Icon name='arrow right'/></Divider>
+  </Segment>
 );
 
 export default CardExampleGroups;

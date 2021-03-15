@@ -3,8 +3,12 @@ import RewardsContract from "./contracts/Rewards.json";
 import getWeb3 from "./getWeb3";
 import NavBar from "./components/commons/NavBar/NavBar";
 import Card from "./components/commons/Card/Card";
-import Form from "./components/commons/Form/Form";
+import CardPaper from "./components/commons/Card/CardPaper";
+import FormPaper from "./components/commons/Form/FormPaper";
+import FormReview from "./components/commons/Form/FormReview";
+import AboutUs from "./components/commons/pages/AboutUs";
 import { Loader } from "semantic-ui-react";
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 import "./App.css";
 
@@ -82,7 +86,7 @@ class App extends Component {
   createPaper(title) {
     this.setState({ ready: true });
     this.state.contract.methods
-      .createPaper(title, this.state.account)
+      .createPaper(title)
       .send({ from: this.state.account })
       /*.on('error', function(error, receipt) {
       alert(
@@ -101,27 +105,51 @@ class App extends Component {
       return <div>Loading Web3, accounts, and contract...</div>;
     }
     return (
-      <div>
-        <NavBar account={this.state.account}></NavBar>
-        {this.state.ready ? (
-          <div>
-            <Loader active inline="centered" />
-          </div>
-        ) : (
-          <div>
-            <div className="cards">
-              <Form createPaper={this.createPaper}></Form>
-              <p></p>
-            </div>
-
-            <div className="cards">
-              <Card tipPaper={this.tipPaper} papers={this.state.papers} web3={this.state.web3}></Card>
-            </div>
-          </div>
-        )}
-      </div>
+      <Router>
+        <div>
+          <NavBar account={this.state.account}></NavBar>
+          <Switch>
+            <Route exact={true} path="/" render={() => (
+              this.state.ready ? (
+                <div>
+                  <Loader active inline="centered" />
+                </div>
+              ) : (
+                <div>
+                  <div className="cards">
+                    <FormPaper createPaper={this.createPaper}></FormPaper>
+                    <p></p>
+                  </div>
+                  <div className="cards">
+                    <CardPaper papers={this.state.papers}></CardPaper>
+                  </div>
+                </div>
+              )
+            )} />
+            <Route exact={true} path="/paper/:id" render={(props) => (
+              this.state.ready ? (
+                <div>
+                  <Loader active inline="centered" />
+                </div>
+              ) : (
+                <div>
+                  <div className="cards">
+                    <FormReview createPaper={this.createPaper}></FormReview>
+                    <p></p>
+                  </div>
+                  <div className="cards">
+                    <Card {...props} tipPaper={this.tipPaper} papers={this.state.papers} web3={this.state.web3}></Card>
+                  </div>
+                </div>
+              )
+            )} />
+            <Route path="/aboutUs" exact component={AboutUs} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }
+
 
 export default App;

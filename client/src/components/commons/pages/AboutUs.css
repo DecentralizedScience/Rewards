@@ -1,0 +1,10 @@
+.aboutus{
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 50%;
+  border-color: blue;
+  border-width: 100px;
+  margin: 0 auto;
+}
+
