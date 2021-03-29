@@ -11,6 +11,8 @@ contract Rewards {
     ReputationToken public reputationtoken;
     AwardsToken public awardsToken;
 
+    //TODO: asociar reviews, registrar reviewer
+
     struct Paper {
         uint id;
         string title;
@@ -21,6 +23,8 @@ contract Rewards {
     }
 
     Paper[] public papers;
+    mapping(address => bool) public reviewerExists;
+    address[] public reviewers;
 
     event PaperCreated(
         uint id,
@@ -67,9 +71,13 @@ contract Rewards {
 
     function addReviewer(uint _id, address payable _reviewer, string memory review) public {
         require(_id < papers.length);
-        require(_reviewer != papers[_id].author); // Can't review yourself TODO: check review not empty
+        require(_reviewer != papers[_id].author);
         papers[_id].reviewers.push(_reviewer);
         papers[_id].reviews[_reviewer] = review;
+        
+        if(!reviewerExists[_reviewer]){
+            reviewers.push(_reviewer);
+        }
 
         emit ReviewerAdded(_id, papers[_id].title, papers[_id].author, _reviewer);
     }
@@ -118,20 +126,23 @@ contract Rewards {
         //emit ReputationGiven(_id,  _reviewer, msg.sender);
     }
 
-    function getReviewers(uint _id) public view returns (address [] memory){
+    function getReviewers() public view returns (address [] memory){
+        return reviewers;
+    }
+    function getPaperReviewers(uint _id) public view returns (address [] memory){
         return papers[_id].reviewers;
     }
 
-    function getReviews(uint _id, address _reviewer) public view returns (string memory){
-        require(reviewerCount(_id) > 0);
+    function getPaperReviewsByReviewer(uint _id, address _reviewer) public view returns (string memory){
+        require(getPaperReviewerCount(_id) > 0);
         return papers[_id].reviews[_reviewer];
     }
 
-    function paperCount() public view returns (uint256) {
+    function getPaperCount() public view returns (uint256) {
         return papers.length;
     }
 
-    function reviewerCount(uint _id) public view returns (uint256) {
+    function getPaperReviewerCount(uint _id) public view returns (uint256) {
         require(_id < papers.length);
         return papers[_id].reviewers.length;
     }
