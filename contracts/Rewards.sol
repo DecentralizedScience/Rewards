@@ -76,6 +76,7 @@ contract Rewards {
         papers[_id].reviews[_reviewer] = review;
         
         if(!reviewerExists[_reviewer]){
+            reviewerExists[_reviewer] = true;
             reviewers.push(_reviewer);
         }
 

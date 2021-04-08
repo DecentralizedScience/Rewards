@@ -31,14 +31,14 @@ class App extends Component {
         deployedNetwork.address
       );
       // Get the papers
-      const paperCount = await instance.methods.paperCount().call();
+      const paperCount = await instance.methods.getPaperCount().call();
       this.setState({ paperCount });
       for (var i = 0; i < paperCount; i++) {
         const paper = await instance.methods.papers(i).call();
         //Get the reviews of the paper
-        const reviewerCount = await instance.methods.reviewerCount(i).call();
+        const reviewerCount = await instance.methods.getPaperReviewerCount(i).call();
         if(reviewerCount > 0){
-          const reviewers = await instance.methods.getReviewers(i).call();
+          const reviewers = await instance.methods.getPaperReviewers(i).call();
           //const reviews = await instance.methods.getReviews(i, reviewers[0]).call();
           this.setState({ reviews: [...this.state.reviews, reviewers] });
         }
@@ -58,7 +58,7 @@ class App extends Component {
   };
 
   updatePapers = async () => {
-    const paperCount = await this.state.contract.methods.paperCount().call();
+    const paperCount = await this.state.contract.methods.getPaperCount().call();
     this.setState({ paperCount });
     const paper = await this.state.contract.methods
       .papers(paperCount - 1)
@@ -67,8 +67,8 @@ class App extends Component {
   };
 
   updateReviews = async (i) => {
-    const reviewerCount = await this.state.contract.methods.reviewerCount(i).call();
-    const reviewers = await this.state.contract.methods.getReviewers(i).call();
+    const reviewerCount = await this.state.contract.methods.getPaperReviewerCount(i).call();
+    const reviewers = await this.state.contract.methods.getPaperReviewers(i).call();
     //const reviews = await this.state.contract.methods.getReviews(i, reviewers[0]).call();
     this.setState({ reviews: [...this.state.reviews.slice(0,i), reviewers, ...this.state.reviews.slice(i+1, reviewerCount) ]});
    
