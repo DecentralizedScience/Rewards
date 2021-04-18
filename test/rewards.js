@@ -1,14 +1,18 @@
 const { assert } = require("chai");
 
-const Rewards = artifacts.require("./Rewards.sol");
+const Rewards = artifacts.require("Rewards.sol");
+const ReputationToken = artifacts.require("ReputationToken.sol");
+const AwardsToken = artifacts.require("AwardsToken.sol");
 
 require("chai").use(require("chai-as-promised")).should();
 
 contract("Rewards", ([deployer, author, reviewer, tipper, reviewer2]) => {
-  let rewards;
+  let rewards, reputationToken, awardsToken;
 
   before(async () => {
-    rewards = await Rewards.deployed();
+    reputationToken = await ReputationToken.new();
+    awardsToken = await AwardsToken.new()
+    rewards = await Rewards.new(reputationToken.address, awardsToken.address);
   });
 
   describe("deployment", async () => {

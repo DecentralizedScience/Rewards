@@ -11,6 +11,11 @@ contract Rewards {
     ReputationToken public reputationtoken;
     AwardsToken public awardsToken;
 
+    constructor(ReputationToken _reputationToken, AwardsToken _awardsToken) {
+        reputationtoken = _reputationToken;
+        awardsToken = _awardsToken;
+    }
+
     //TODO: asociar reviews, registrar reviewer
 
     struct Paper {
@@ -19,7 +24,7 @@ contract Rewards {
         uint tipAmount;
         address author;
         address[] reviewers;
-        mapping(address => string) reviews;
+        mapping(address => string) reviews; //TODO update to array of strings
     }
 
     Paper[] public papers;
