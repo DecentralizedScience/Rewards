@@ -131,6 +131,7 @@ contract Rewards {
         return reviewers;
     }
     function getPaperReviewers(uint _id) public view returns (address [] memory){
+        require(_id < papers.length);
         return papers[_id].reviewers;
     }
 

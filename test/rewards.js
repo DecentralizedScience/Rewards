@@ -4,7 +4,7 @@ const Rewards = artifacts.require("./Rewards.sol");
 
 require("chai").use(require("chai-as-promised")).should();
 
-contract("Rewards", ([deployer, author, reviewer, tipper]) => {
+contract("Rewards", ([deployer, author, reviewer, tipper, reviewer2]) => {
   let rewards;
 
   before(async () => {
@@ -59,6 +59,28 @@ contract("Rewards", ([deployer, author, reviewer, tipper]) => {
       assert.equal(reviewerCount.toNumber(), "1", "have 1 reviewer");
     });
 
+    it("get all reviewers", async () => {
+      paper = await rewards.addReviewer(paperCount - 1, reviewer2, "LGTM" );
+
+      const reviewers = await rewards.getReviewers();
+      assert.equal(reviewers.length, "2", "have 2 reviewers");
+    });
+
+    it("get all reviewers of a paper", async () => {
+      const paperReviewers = await rewards.getPaperReviewers(paperCount - 1);
+      assert.equal(paperReviewers.length, "2", "the paper have 2 reviewers");
+    });
+
+    it("get the number of papers", async () => {
+      const papersCount = await rewards.getPaperCount();
+      assert.equal(papersCount, "1", "have 1 paper");
+    });
+
+    it("get the number of reviewers of a paper", async () => {
+      const paperReviewersCount = await rewards.getPaperReviewerCount(paperCount - 1);
+      assert.equal(paperReviewersCount, "2", "the paper have 2 reviewers");
+    });
+
     it("allows users to tip reviewers", async () => {
       // Track the reviewer balance before purchase
       let oldReviewerBalance;
@@ -102,9 +124,25 @@ contract("Rewards", ([deployer, author, reviewer, tipper]) => {
         value: web3.utils.toWei("1", "Ether"),
       }).should.be.rejected;
     });
+  });
+
+  describe("reputation", async () => {
+    let paperCount;
+
+    before(async () => {
+      paperCount = await rewards.getPaperCount();
+      paperCount = paperCount.toNumber();
+    });
 
     //giveReputation
-    it("give reputation to reviewer", async () => {});
+    it("give reputation to reviewer", async () => {
+      await rewards.giveReputation(paperCount - 1, reviewer, {
+        from: tipper,
+      });
+      
+      const reputation = await rewards.getReputation(reviewer);
+      assert.equal("1", reputation, "the reviewer have reputation");
+    });
 
     //undoGiveReputation
     it("undo give reputation to reviewer", async () => {});

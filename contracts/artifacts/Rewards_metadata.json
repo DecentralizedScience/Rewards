@@ -1,0 +1,606 @@
+{
+	"compiler": {
+		"version": "0.8.1+commit.df193b15"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tipAmount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "author",
+						"type": "address"
+					}
+				],
+				"name": "PaperCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address payable",
+						"name": "reviewer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "ReputationGiven",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address payable",
+						"name": "reviewer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					}
+				],
+				"name": "ReputationTaken",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "author",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address payable",
+						"name": "reviewer",
+						"type": "address"
+					}
+				],
+				"name": "ReviewerAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tipAmount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "author",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address payable",
+						"name": "reviewer",
+						"type": "address"
+					}
+				],
+				"name": "ReviewerTipped",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "_reviewer",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "review",
+						"type": "string"
+					}
+				],
+				"name": "addReviewer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "awardsToken",
+				"outputs": [
+					{
+						"internalType": "contract AwardsToken",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_title",
+						"type": "string"
+					}
+				],
+				"name": "createPaper",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getPaperCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "getPaperReviewerCount",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "getPaperReviewers",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_reviewer",
+						"type": "address"
+					}
+				],
+				"name": "getPaperReviewsByReviewer",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_reviewer",
+						"type": "address"
+					}
+				],
+				"name": "getReputation",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getReviewers",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "_reviewer",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_awardId",
+						"type": "uint256"
+					}
+				],
+				"name": "giveAward",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "_reviewer",
+						"type": "address"
+					}
+				],
+				"name": "giveReputation",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "hasGivenAward",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"name": "hasGivenReputation",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "papers",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tipAmount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "author",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "reputationtoken",
+				"outputs": [
+					{
+						"internalType": "contract ReputationToken",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "reviewerExists",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "reviewers",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "_reviewer",
+						"type": "address"
+					}
+				],
+				"name": "tipReviewer",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address payable",
+						"name": "_reviewer",
+						"type": "address"
+					}
+				],
+				"name": "undoGiveReputation",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Rewards.sol": "Rewards"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/AwardsToken.sol": {
+			"keccak256": "0x1a99b01cb1fa6128f302c2ae4c14c0719c47c96a594355903926c130a30bcf89",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6c2ad054eedafbb19f006e001d9a01e63a7166cacf58cca1f3c03223e4a3d846",
+				"dweb:/ipfs/QmQLsGyrNifDFvppJwfNwawg9SPLTYEgx2ufAJkHEYqYNy"
+			]
+		},
+		"contracts/IAwardsToken.sol": {
+			"keccak256": "0x52d8f85d663730ffcf1b156935e32b3a65dc811363c6db49029521afa5b33d5d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7523f8bcbbb95feea1ae1b98cf476d59c48cd5d129ee78aab363289e81e772be",
+				"dweb:/ipfs/QmQqZJttdB2exi3noDtGPkAtVufPKCHsfd5yjCEKykW9Ez"
+			]
+		},
+		"contracts/IReputationToken.sol": {
+			"keccak256": "0xdebf6e03293c5a14932da18dab2b311e869f2ec268a90c728d5cb04c72ef7e75",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://942d22306d48306dfd92142d02791ed07c140aee4c142137a1e359dd3e5add99",
+				"dweb:/ipfs/QmTCENLdJAY5hcAAgqengR5oCUPz8m69rPJuXau6fhsNS6"
+			]
+		},
+		"contracts/ReputationToken.sol": {
+			"keccak256": "0xfef60ff5c27395f386b2c52833137df485a82b76db19ece20d6ba846fe43fa4a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ca9721b533e2a1622166c59b0e7f04faf89f5e368ff7d988bad89c9c46ae79dd",
+				"dweb:/ipfs/QmYXLWp2LJ4QdMuGKRk6VqtrNVgUoaRyu7B38VQWB4fPdU"
+			]
+		},
+		"contracts/Rewards.sol": {
+			"keccak256": "0x2715844bb92a072a7247268ef48de5c76ad209531f3b55c551d983df5dde616d",
+			"urls": [
+				"bzz-raw://901e6dc70b397d9881ffde5f87ca8446284996d2a4e7951b29b0cd5abbecba02",
+				"dweb:/ipfs/QmUX9iAddieKhiXFHtcWnSbk3SU6yDDm4jtu5mLtj17zAo"
+			]
+		},
+		"utils/Address.sol": {
+			"keccak256": "0x56c55493b8912cb4729acd8a226a37dfb815c104cb57536a899bdaa708b45e1c",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://13456b3168b87f09c352f0074f4942b07651b6c1e153860879c3ae9ae0426cb4",
+				"dweb:/ipfs/QmZnZ9FEYxGBGx1AqRSv85XZwN9pBDYJxUKQ2ydYdQcyDj"
+			]
+		},
+		"utils/Context.sol": {
+			"keccak256": "0x99129967fbe3d90c3be13d7372e689a526650424787a72860dc9059df671be8f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://25dea5bb3ce25a71b65e015d80a6d7960cc29a53c12fb17a9bf34132f7de4faf",
+				"dweb:/ipfs/QmaJ4UGyVBbjgXzB6ebuFPYTZnDSWSqENBRv3py1MeTiLE"
+			]
+		},
+		"utils/Strings.sol": {
+			"keccak256": "0x48c16c461709fc32694db45f731ce8c2280df38696ce040839e526218fb92bd5",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://b6ac46a05d90f4fcf6c14f11a14b6780745ec65f4321c55ad968c453516b58a4",
+				"dweb:/ipfs/QmP27UDVFVsX7F1nAmAseRmzNLcoExuUQmtyhotSEpzoM2"
+			]
+		}
+	},
+	"version": 1
+}
