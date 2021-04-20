@@ -30,7 +30,7 @@ contract Rewards {
     Paper[] public papers;
     mapping(address => bool) public reviewerExists;
     address[] public reviewers;
-    string[] public awards;
+    mapping(address => string []) awards;
 
     event PaperCreated(
         uint id,
@@ -135,13 +135,19 @@ contract Rewards {
         string memory _hash = string(abi.encode(_id, _reviewer, msg.sender, _awardId));
         require(!hasGivenAward[_hash]);
         awardsToken.mint(_reviewer, _hash);
-        awards.push(_hash);
+        awards[_reviewer].push(_hash);
 
         emit AwardGiven(_id,  _reviewer, msg.sender, _awardId);
     }
 
-    function getAward() public view returns (string [] memory){
-        string [] memory temp;
+    function getAwards(address _reviewer) public view returns (uint [] memory){
+        string [] storage hashes = awards[_reviewer];
+        uint [] memory awardsList;
+
+        for(uint i = 0; i < hashes.length; i++){
+            string memory _hash = hashes[i]; 
+            awardsList.push(string(abi.decode(bytes(_hash), (uint , address, address, uint))));
+        }    
 
         return reviewers;
     }
