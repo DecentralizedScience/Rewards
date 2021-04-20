@@ -149,12 +149,33 @@ contract("Rewards", ([deployer, author, reviewer, tipper, reviewer2]) => {
     });
 
     //undoGiveReputation
-    it("undo give reputation to reviewer", async () => {});
+    it("undo give reputation to reviewer", async () => {
+      await rewards.undoGiveReputation(paperCount - 1, reviewer, {
+        from: tipper,
+      });
+      
+      const reputation = await rewards.getReputation(reviewer);
+      assert.equal("0", reputation, "the reviewer have reputation");
+    });
+  });
 
-    //getReputation
-    it("get reputation of reviewer", async () => {});
+  describe("award", async () => {
+    let paperCount;
+
+    before(async () => {
+      paperCount = await rewards.getPaperCount();
+      paperCount = paperCount.toNumber();
+    });
 
     //giveAward
-    it("give award to reviewer", async () => {});
+    it("give award to reviewer", async () => {
+      await rewards.giveAward(paperCount - 1, reviewer, 0, {
+        from: tipper,
+      });
+      
+      const reputation = await rewards.getReputation(reviewer);
+      assert.equal("0", reputation, "the reviewer have reputation");
+    });
+    });
   });
 });

@@ -30,6 +30,7 @@ contract Rewards {
     Paper[] public papers;
     mapping(address => bool) public reviewerExists;
     address[] public reviewers;
+    string[] public awards;
 
     event PaperCreated(
         uint id,
@@ -63,6 +64,13 @@ contract Rewards {
         uint id,
         address payable reviewer,
         address user
+    );
+
+    event AwardGiven(
+        uint id,
+        address payable reviewer,
+        address user,
+        uint awardId
     );
 
     function createPaper(string memory _title) public {
@@ -120,7 +128,6 @@ contract Rewards {
         return reputationtoken.balanceOf(_reviewer);
     }
 
-    //TODO test and event
     function giveAward(uint _id, address payable _reviewer, uint _awardId ) public payable{
         require(_id < papers.length);
         require(_awardId < 4);
@@ -128,13 +135,25 @@ contract Rewards {
         string memory _hash = string(abi.encode(_id, _reviewer, msg.sender, _awardId));
         require(!hasGivenAward[_hash]);
         awardsToken.mint(_reviewer, _hash);
+        awards.push(_hash);
 
-        //emit ReputationGiven(_id,  _reviewer, msg.sender);
+        emit AwardGiven(_id,  _reviewer, msg.sender, _awardId);
+    }
+
+    function getAward() public view returns (string [] memory){
+        string [] memory temp;
+
+        return reviewers;
+    }
+
+    function getAwardsBalance(address _id) public view returns (uint){
+        return awardsToken.balanceOf(_id);
     }
 
     function getReviewers() public view returns (address [] memory){
         return reviewers;
     }
+
     function getPaperReviewers(uint _id) public view returns (address [] memory){
         require(_id < papers.length);
         return papers[_id].reviewers;
