@@ -173,8 +173,11 @@ contract("Rewards", ([deployer, author, reviewer, tipper, reviewer2]) => {
         from: tipper,
       });
       
-      const awards = await rewards.getAwards(reviewer);
-      assert.equal("0", awards, "the reviewer have awards");
+      const award = await rewards.getAward(reviewer, 0);
+       assert.equal(award.id, paperCount - 1, "paper is correct");
+       assert.equal(award.reviewer, reviewer, "reviewer is correct");
+       assert.equal(award.sender, tipper, "tipper is correct");
+       assert.equal(award.awardId, 0, "award id is correct");
     });
   });
 });
