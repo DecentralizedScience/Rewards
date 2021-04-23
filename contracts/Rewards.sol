@@ -143,13 +143,17 @@ contract Rewards {
     function getAwards(address _reviewer) public view returns (uint [] memory){
         string [] storage hashes = awards[_reviewer];
         uint [] memory awardsList;
+        uint _id;
+        address _rev;
+        address _sender;
+        uint _awardId;
 
         for(uint i = 0; i < hashes.length; i++){
             string memory _hash = hashes[i]; 
-            awardsList.push(string(abi.decode(bytes(_hash), (uint , address, address, uint))));
-        }    
-
-        return reviewers;
+            (_id, _rev, _sender, _awardId) = (abi.decode(bytes(_hash), (uint , address, address, uint)));
+            awardsList[i] = _awardId;
+        }
+        return awardsList;
     }
 
     function getAwardsBalance(address _id) public view returns (uint){

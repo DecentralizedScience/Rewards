@@ -176,6 +176,5 @@ contract("Rewards", ([deployer, author, reviewer, tipper, reviewer2]) => {
       const reputation = await rewards.getReputation(reviewer);
       assert.equal("0", reputation, "the reviewer have reputation");
     });
-    });
   });
 });
