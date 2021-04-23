@@ -16,7 +16,12 @@ contract Rewards {
         awardsToken = _awardsToken;
     }
 
-    //TODO: asociar reviews, registrar reviewer
+    struct Award {
+        uint id;
+        address reviewer;
+        address sender;
+        uint awardId;
+    }
 
     struct Paper {
         uint id;
@@ -110,6 +115,7 @@ contract Rewards {
         require(bytes(papers[_id].reviews[_reviewer]).length != 0);
         string memory _hash = string(abi.encode(_id, _reviewer, msg.sender));
         require(!hasGivenReputation[_hash]);
+        hasGivenReputation[_hash] = true;
         reputationtoken.mint(_reviewer, REPUTATION);
 
         emit ReputationGiven(_id,  _reviewer, msg.sender);
@@ -119,6 +125,7 @@ contract Rewards {
         require(_id < papers.length);
         string memory _hash = string(abi.encode(_id, _reviewer, msg.sender));
         require(hasGivenReputation[_hash]);
+        hasGivenReputation[_hash] = false;
         reputationtoken.burn(_reviewer, REPUTATION);
 
         emit ReputationTaken(_id,  _reviewer, msg.sender);
@@ -140,18 +147,14 @@ contract Rewards {
         emit AwardGiven(_id,  _reviewer, msg.sender, _awardId);
     }
 
-    function getAwards(address _reviewer) public view returns (uint [] memory){
+    function getAwards(address _reviewer) public view returns (Award [] memory){
         string [] storage hashes = awards[_reviewer];
-        uint [] memory awardsList;
-        uint _id;
-        address _rev;
-        address _sender;
-        uint _awardId;
+        Award [] memory awardsList;
+
 
         for(uint i = 0; i < hashes.length; i++){
             string memory _hash = hashes[i]; 
-            (_id, _rev, _sender, _awardId) = (abi.decode(bytes(_hash), (uint , address, address, uint)));
-            awardsList[i] = _awardId;
+            (awardsList[i].id, awardsList[i].reviewer, awardsList[i].sender, awardsList[i].awardId) = (abi.decode(bytes(_hash), (uint , address, address, uint)));
         }
         return awardsList;
     }
