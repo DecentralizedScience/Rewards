@@ -147,14 +147,16 @@ contract Rewards {
         emit AwardGiven(_id,  _reviewer, msg.sender, _awardId);
     }
 
-    function getAwards(address _reviewer) public view returns (Award [] memory){
+    Award [] awardsList;
+
+    function getAwards(address _reviewer) public returns (Award [] memory){
         string [] storage hashes = awards[_reviewer];
-        Award [] memory awardsList;
-
-
+        delete awardsList;
         for(uint i = 0; i < hashes.length; i++){
             string memory _hash = hashes[i]; 
-            (awardsList[i].id, awardsList[i].reviewer, awardsList[i].sender, awardsList[i].awardId) = (abi.decode(bytes(_hash), (uint , address, address, uint)));
+            Award memory a;
+            (a.id, a.reviewer, a.sender, a.awardId) = (abi.decode(bytes(_hash), (uint , address, address, uint)));
+            awardsList.push(a);
         }
         return awardsList;
     }
