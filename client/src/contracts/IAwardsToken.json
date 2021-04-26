@@ -40,7 +40,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.1+commit.df193b15\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tokenId\",\"type\":\"string\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Required interface of an ERC721 compliant contract.\",\"kind\":\"dev\",\"methods\":{\"balanceOf(address)\":{\"details\":\"Returns the number of tokens in ``owner``'s account.\"},\"ownerOf(string)\":{\"details\":\"Returns the owner of the `tokenId` token. Requirements: - `tokenId` must exist.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/home/dani/bk/Rewards/contracts/IAwardsToken.sol\":\"IAwardsToken\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/dani/bk/Rewards/contracts/IAwardsToken.sol\":{\"keccak256\":\"0xb271985e61d783a51246b72dfc5eb74f5160aad5ffbd0903cf2d5424db4af667\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://3bfa681ae49086f0789aa3774d67bfb930db957f5757eb166cc4aec3b52960df\",\"dweb:/ipfs/QmPnboRmWmkpkUPyV6FtAfHmk5LYgmGGEnJLQJL25wCGcE\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.1+commit.df193b15\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"name\":\"balanceOf\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"balance\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"tokenId\",\"type\":\"string\"}],\"name\":\"ownerOf\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"owner\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"details\":\"Required interface of an ERC721 compliant contract.\",\"kind\":\"dev\",\"methods\":{\"balanceOf(address)\":{\"details\":\"Returns the number of tokens in ``owner``'s account.\"},\"ownerOf(string)\":{\"details\":\"Returns the owner of the `tokenId` token. Requirements: - `tokenId` must exist.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/C/Users/frg19/Documents/GitHub/Rewards/contracts/IAwardsToken.sol\":\"IAwardsToken\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/frg19/Documents/GitHub/Rewards/contracts/IAwardsToken.sol\":{\"keccak256\":\"0x52d8f85d663730ffcf1b156935e32b3a65dc811363c6db49029521afa5b33d5d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://7523f8bcbbb95feea1ae1b98cf476d59c48cd5d129ee78aab363289e81e772be\",\"dweb:/ipfs/QmQqZJttdB2exi3noDtGPkAtVufPKCHsfd5yjCEKykW9Ez\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "immutableReferences": {},
@@ -48,21 +48,21 @@
   "deployedGeneratedSources": [],
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.8.0;\n\n/**\n * @dev Required interface of an ERC721 compliant contract.\n */\ninterface IAwardsToken {\n    /**\n     * @dev Returns the number of tokens in ``owner``'s account.\n     */\n    function balanceOf(address owner) external view returns (uint256 balance);\n\n    /**\n     * @dev Returns the owner of the `tokenId` token.\n     *\n     * Requirements:\n     *\n     * - `tokenId` must exist.\n     */\n    function ownerOf(string memory tokenId) external view returns (address owner);\n}",
-  "sourcePath": "/home/dani/bk/Rewards/contracts/IAwardsToken.sol",
+  "source": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity ^0.8.0;\r\n\r\n/**\r\n * @dev Required interface of an ERC721 compliant contract.\r\n */\r\ninterface IAwardsToken {\r\n    /**\r\n     * @dev Returns the number of tokens in ``owner``'s account.\r\n     */\r\n    function balanceOf(address owner) external view returns (uint256 balance);\r\n\r\n    /**\r\n     * @dev Returns the owner of the `tokenId` token.\r\n     *\r\n     * Requirements:\r\n     *\r\n     * - `tokenId` must exist.\r\n     */\r\n    function ownerOf(string memory tokenId) external view returns (address owner);\r\n}",
+  "sourcePath": "C:/Users/frg19/Documents/GitHub/Rewards/contracts/IAwardsToken.sol",
   "ast": {
-    "absolutePath": "/home/dani/bk/Rewards/contracts/IAwardsToken.sol",
+    "absolutePath": "/C/Users/frg19/Documents/GitHub/Rewards/contracts/IAwardsToken.sol",
     "exportedSymbols": {
       "IAwardsToken": [
-        228
+        19
       ]
     },
-    "id": 229,
+    "id": 20,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 210,
+        "id": 1,
         "literals": [
           "solidity",
           "^",
@@ -70,7 +70,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:1"
+        "src": "35:23:0"
       },
       {
         "abstract": false,
@@ -78,45 +78,45 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 211,
+          "id": 2,
           "nodeType": "StructuredDocumentation",
-          "src": "58:67:1",
+          "src": "62:69:0",
           "text": " @dev Required interface of an ERC721 compliant contract."
         },
         "fullyImplemented": false,
-        "id": 228,
+        "id": 19,
         "linearizedBaseContracts": [
-          228
+          19
         ],
         "name": "IAwardsToken",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "documentation": {
-              "id": 212,
+              "id": 3,
               "nodeType": "StructuredDocumentation",
-              "src": "155:76:1",
+              "src": "163:78:0",
               "text": " @dev Returns the number of tokens in ``owner``'s account."
             },
             "functionSelector": "70a08231",
-            "id": 219,
+            "id": 10,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "balanceOf",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 215,
+              "id": 6,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 214,
+                  "id": 5,
                   "mutability": "mutable",
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 219,
-                  "src": "255:13:1",
+                  "scope": 10,
+                  "src": "266:13:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -124,10 +124,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 213,
+                    "id": 4,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "255:7:1",
+                    "src": "266:7:0",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -137,20 +137,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "254:15:1"
+              "src": "265:15:0"
             },
             "returnParameters": {
-              "id": 218,
+              "id": 9,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 217,
+                  "id": 8,
                   "mutability": "mutable",
                   "name": "balance",
                   "nodeType": "VariableDeclaration",
-                  "scope": 219,
-                  "src": "293:15:1",
+                  "scope": 10,
+                  "src": "304:15:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -158,10 +158,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 216,
+                    "id": 7,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "293:7:1",
+                    "src": "304:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -170,40 +170,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "292:17:1"
+              "src": "303:17:0"
             },
-            "scope": 228,
-            "src": "236:74:1",
+            "scope": 19,
+            "src": "247:74:0",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 220,
+              "id": 11,
               "nodeType": "StructuredDocumentation",
-              "src": "316:131:1",
+              "src": "329:137:0",
               "text": " @dev Returns the owner of the `tokenId` token.\n Requirements:\n - `tokenId` must exist."
             },
             "functionSelector": "920ffa26",
-            "id": 227,
+            "id": 18,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "ownerOf",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 223,
+              "id": 14,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 222,
+                  "id": 13,
                   "mutability": "mutable",
                   "name": "tokenId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 227,
-                  "src": "469:21:1",
+                  "scope": 18,
+                  "src": "489:21:0",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -211,10 +211,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 221,
+                    "id": 12,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "469:6:1",
+                    "src": "489:6:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -223,20 +223,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "468:23:1"
+              "src": "488:23:0"
             },
             "returnParameters": {
-              "id": 226,
+              "id": 17,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 225,
+                  "id": 16,
                   "mutability": "mutable",
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 227,
-                  "src": "515:13:1",
+                  "scope": 18,
+                  "src": "535:13:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -244,10 +244,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 224,
+                    "id": 15,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "515:7:1",
+                    "src": "535:7:0",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -257,34 +257,34 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "514:15:1"
+              "src": "534:15:0"
             },
-            "scope": 228,
-            "src": "452:78:1",
+            "scope": 19,
+            "src": "472:78:0",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 229,
-        "src": "126:406:1"
+        "scope": 20,
+        "src": "133:420:0"
       }
     ],
-    "src": "33:499:1"
+    "src": "35:518:0"
   },
   "legacyAST": {
-    "absolutePath": "/home/dani/bk/Rewards/contracts/IAwardsToken.sol",
+    "absolutePath": "/C/Users/frg19/Documents/GitHub/Rewards/contracts/IAwardsToken.sol",
     "exportedSymbols": {
       "IAwardsToken": [
-        228
+        19
       ]
     },
-    "id": 229,
+    "id": 20,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 210,
+        "id": 1,
         "literals": [
           "solidity",
           "^",
@@ -292,7 +292,7 @@
           ".0"
         ],
         "nodeType": "PragmaDirective",
-        "src": "33:23:1"
+        "src": "35:23:0"
       },
       {
         "abstract": false,
@@ -300,45 +300,45 @@
         "contractDependencies": [],
         "contractKind": "interface",
         "documentation": {
-          "id": 211,
+          "id": 2,
           "nodeType": "StructuredDocumentation",
-          "src": "58:67:1",
+          "src": "62:69:0",
           "text": " @dev Required interface of an ERC721 compliant contract."
         },
         "fullyImplemented": false,
-        "id": 228,
+        "id": 19,
         "linearizedBaseContracts": [
-          228
+          19
         ],
         "name": "IAwardsToken",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "documentation": {
-              "id": 212,
+              "id": 3,
               "nodeType": "StructuredDocumentation",
-              "src": "155:76:1",
+              "src": "163:78:0",
               "text": " @dev Returns the number of tokens in ``owner``'s account."
             },
             "functionSelector": "70a08231",
-            "id": 219,
+            "id": 10,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "balanceOf",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 215,
+              "id": 6,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 214,
+                  "id": 5,
                   "mutability": "mutable",
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 219,
-                  "src": "255:13:1",
+                  "scope": 10,
+                  "src": "266:13:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -346,10 +346,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 213,
+                    "id": 4,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "255:7:1",
+                    "src": "266:7:0",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -359,20 +359,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "254:15:1"
+              "src": "265:15:0"
             },
             "returnParameters": {
-              "id": 218,
+              "id": 9,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 217,
+                  "id": 8,
                   "mutability": "mutable",
                   "name": "balance",
                   "nodeType": "VariableDeclaration",
-                  "scope": 219,
-                  "src": "293:15:1",
+                  "scope": 10,
+                  "src": "304:15:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -380,10 +380,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 216,
+                    "id": 7,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "293:7:1",
+                    "src": "304:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -392,40 +392,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "292:17:1"
+              "src": "303:17:0"
             },
-            "scope": 228,
-            "src": "236:74:1",
+            "scope": 19,
+            "src": "247:74:0",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           },
           {
             "documentation": {
-              "id": 220,
+              "id": 11,
               "nodeType": "StructuredDocumentation",
-              "src": "316:131:1",
+              "src": "329:137:0",
               "text": " @dev Returns the owner of the `tokenId` token.\n Requirements:\n - `tokenId` must exist."
             },
             "functionSelector": "920ffa26",
-            "id": 227,
+            "id": 18,
             "implemented": false,
             "kind": "function",
             "modifiers": [],
             "name": "ownerOf",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 223,
+              "id": 14,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 222,
+                  "id": 13,
                   "mutability": "mutable",
                   "name": "tokenId",
                   "nodeType": "VariableDeclaration",
-                  "scope": 227,
-                  "src": "469:21:1",
+                  "scope": 18,
+                  "src": "489:21:0",
                   "stateVariable": false,
                   "storageLocation": "memory",
                   "typeDescriptions": {
@@ -433,10 +433,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 221,
+                    "id": 12,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "469:6:1",
+                    "src": "489:6:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -445,20 +445,20 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "468:23:1"
+              "src": "488:23:0"
             },
             "returnParameters": {
-              "id": 226,
+              "id": 17,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 225,
+                  "id": 16,
                   "mutability": "mutable",
                   "name": "owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 227,
-                  "src": "515:13:1",
+                  "scope": 18,
+                  "src": "535:13:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -466,10 +466,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 224,
+                    "id": 15,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "515:7:1",
+                    "src": "535:7:0",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -479,28 +479,28 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "514:15:1"
+              "src": "534:15:0"
             },
-            "scope": 228,
-            "src": "452:78:1",
+            "scope": 19,
+            "src": "472:78:0",
             "stateMutability": "view",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 229,
-        "src": "126:406:1"
+        "scope": 20,
+        "src": "133:420:0"
       }
     ],
-    "src": "33:499:1"
+    "src": "35:518:0"
   },
   "compiler": {
     "name": "solc",
     "version": "0.8.1+commit.df193b15.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.3.3",
-  "updatedAt": "2021-04-18T17:57:32.798Z",
+  "schemaVersion": "3.3.4",
+  "updatedAt": "2021-04-23T13:14:31.884Z",
   "devdoc": {
     "details": "Required interface of an ERC721 compliant contract.",
     "kind": "dev",

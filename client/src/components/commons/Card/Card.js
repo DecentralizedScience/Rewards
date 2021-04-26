@@ -1,9 +1,22 @@
 import React from "react";
-import { Label, Icon, Header, Container, Divider, Grid, Segment, Button, Card, Image } from "semantic-ui-react";
+import { Label, Icon, Header, Container, Divider, Grid, Segment, Button, Card, Image, Popup, Dropdown, Menu } from "semantic-ui-react";
 import Identicon from "identicon.js";
 
 
-const CardExampleGroups = ({match, tipPaper, papers, web3, reviews, reviewCount}) => (
+
+
+const options = [
+  { key: 1, text: 'Platinum', value: 0 },
+  { key: 2, text: 'Gold', value: 1 },
+  { key: 3, text: 'Silver', value: 2 },
+  { key: 4, text: 'Fast', value: 3 }
+]
+
+
+
+
+
+ const CardExampleGroups = ({match, tipPaper, sayThanks, getThanks, giveReward, papers, web3, reviews, reviewCount}) => (
   <Segment>
     <Grid columns={2} relaxed='very'>
       <Grid.Column>
@@ -45,6 +58,7 @@ const CardExampleGroups = ({match, tipPaper, papers, web3, reviews, reviewCount}
       <Grid.Column>
       <Card.Group>
     {reviews[match.params.id] != null ?  (reviews[match.params.id].map((review, key) => {
+     
       return (
         <Card fluid color="grey" key={key}>
           <Card.Content>
@@ -59,6 +73,7 @@ const CardExampleGroups = ({match, tipPaper, papers, web3, reviews, reviewCount}
             <Card.Header>Review {key}</Card.Header>
             <Card.Description>
               by {review}
+              
             </Card.Description>
           </Card.Content>
           <Card.Content extra>
@@ -77,18 +92,25 @@ const CardExampleGroups = ({match, tipPaper, papers, web3, reviews, reviewCount}
                 <Icon name='ethereum' />
                 </Button.Content>
               </Button>
-              <Button animated='vertical' basic color="blue">
+              <Button
+                animated='vertical'
+                basic color="blue"
+                onClick={() =>{ 
+                  sayThanks(key, review);
+                  getThanks(review);
+                }}>
                 <Button.Content hidden>Say thanks!</Button.Content>
                 <Button.Content visible >
                 <Icon name='thumbs up' />
                 </Button.Content>
               </Button>
-              <Button animated='vertical' basic color="orange">
-                <Button.Content hidden>Reward</Button.Content>
-                <Button.Content visible>
-                <Icon name='trophy' />
-                </Button.Content>
-              </Button>
+
+              <Menu compact>
+                <Dropdown text='Reward' options={options}  onChange={(event, data) => {
+                  giveReward(key, review, data.value);
+                }} simple item />
+              </Menu>
+
             </div>
           </Card.Content>
         </Card>

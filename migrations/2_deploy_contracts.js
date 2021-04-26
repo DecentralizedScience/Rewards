@@ -9,5 +9,5 @@ module.exports = async function(deployer) {
   await deployer.deploy(AwardsToken);
   const awardsToken = await AwardsToken.deployed();
 
-  deployer.deploy(Rewards, reputationToken.address, awardsToken.address);
+  await deployer.deploy(Rewards, reputationToken.address, awardsToken.address);
 };
