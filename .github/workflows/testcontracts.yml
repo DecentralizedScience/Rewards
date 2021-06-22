@@ -1,0 +1,17 @@
+name: Test-Contracts
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - name: Install truffle and run tests
+        run: |
+          npm install truffle -g
+          npm install
+          truffle test

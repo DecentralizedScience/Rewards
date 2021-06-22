@@ -1,0 +1,1 @@
+export const awardList = ["Platinum", "Gold", "Silver", "Fast Review"];

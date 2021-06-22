@@ -1,0 +1,25 @@
+.paper-content{
+  text-align: center;
+  margin-top: 50px;
+}
+
+.article {
+    text-align: justify;
+}
+
+.container {
+  display: flex;
+  width: 60%;
+  margin: 1em auto;
+}
+
+.reviews-list {
+  overflow-y: scroll;
+  height: 50em;
+}
+
+.article-container{
+  margin-top: 15px;
+  /*width: 550px;*/
+}
+

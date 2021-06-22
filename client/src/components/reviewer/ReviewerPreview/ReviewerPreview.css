@@ -1,0 +1,12 @@
+.text-review {
+  text-align: center;
+}
+
+.ant-select-selector {
+  border: none !important;
+}
+
+.read-more-button {
+  cursor: pointer;
+  color: #286da8;
+}

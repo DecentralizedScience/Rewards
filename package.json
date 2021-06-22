@@ -1,0 +1,9 @@
+{
+  "name": "rewards",
+  "version": "1.0.0",
+  "description": "Blockchain rewards",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1"
+  }
+}

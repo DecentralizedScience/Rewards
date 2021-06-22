@@ -1,0 +1,35 @@
+.content {
+  /*text-align: center;*/
+  margin: 2rem;
+}
+
+.layout {
+  height: 100vh;
+  overflow: auto;
+}
+
+.section {
+  text-align: left;
+  max-width: 720px;
+  margin: 4rem auto auto;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cardsContainer {
+  width: 60%;
+  margin: auto;
+}
+
+.card {
+  margin: 1em;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  float: right;
+}
